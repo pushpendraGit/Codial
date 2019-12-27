@@ -4,9 +4,19 @@
 <% if(locals.user) {%>
 <section id="feed-posts">
     <h4>Posts</h4>
-    <form action="" id="new-post-form" method="POST">
+    <form action="/posts/create-Post" id="new-post-form" method="POST">
         <textarea name="content" cols="40" rows="5"></textarea>
         <input type="submit" value="Post">
     </form>
 </section>
 <% } %>
+<div id="post-list-container">
+    <ul>
+        <% for(post of allposts){ %>    
+            <li><%= post.content %><br>
+                Posted By: <%= post.user.name %>            
+            </li>
+            
+        <% } %>
+    </ul>
+</div>

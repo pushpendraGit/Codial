@@ -10,6 +10,7 @@ console.log('router loaded');
 
 router.get('/', homeController.home);
 router.use('/users', require('./users'));
+router.use('/posts', require('./posts'));
 
 router.get('/sign-up', usersController.signUp); //display the sign-in page
 router.get('/sign-in', usersController.signIn); //display the sign-up page
