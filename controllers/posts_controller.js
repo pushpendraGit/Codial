@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const Post = require('../models/post');
+const Comment = require('../models/comment');
 
 module.exports.createPost = function(req, res){
     // console.log(req.body);
@@ -19,4 +20,20 @@ module.exports.createPost = function(req, res){
             return res.redirect('/');
         });
     });
+}
+
+module.exports.destroyPost = function(req,res){
+    Post.findById(req.params.id, function(err, post){
+        if(req.user.id==post.user){
+            post.remove();
+            Comment.deleteMany({post:req.params.id}, function(err){
+                if(err){
+                    console.log("Could Not Delete", err);
+                }
+            });
+            post.update();
+            
+        }
+    });
+    return res.redirect('/');
 }

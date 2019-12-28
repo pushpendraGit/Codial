@@ -10,13 +10,21 @@
     </form>
 </section>
 <% } %>
-<div id="post-list-container">
-    <ul>
-        <% for(post of allposts){ %>    
-            <li><%= post.content %><br>
-                Posted By: <%= post.user.name %>            
-            </li>
-            
+<section>
+    <div id="post-list-container">
+        <ul>
+            <% for(post of allposts){ %>    
+                <%- include('_post') -%>
+            <% } %>
+        </ul>
+    </div>
+</section>
+<br><br>
+<% if(locals.user){ %>
+    <section>
+        <% for(user of allusers){ %>
+            <a href="/users/profile/<%= user.id %>"><%= user.name %></a><br>
         <% } %>
-    </ul>
-</div>
+    </section>
+<% } %>
+<br><br>
