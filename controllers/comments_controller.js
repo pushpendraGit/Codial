@@ -16,11 +16,11 @@ module.exports.createComment = function(req, res){
                     console.log("Error in Publishing Comment !!!", err);
                     return res.redirect('back');
                 }
-                console.log(comment);
                 post.comments.push(comment);
                 post.save();
                 return res.redirect('back');
             });
+            req.flash('success', 'Comment Created Successfully');
         }
     });    
 };
@@ -38,10 +38,14 @@ module.exports.deleteComment = function(req, res){
             }, function(err, comment){
                 if(err){
                     console.log(err);
+                    req.flash('error', 'Some Error Ocurred');
+                    return res.redirect('/');
                 }
+                req.flash('success', 'Comment Deleted Successfully');
                 return res.redirect('/');
             });
         }else{
+            req.flash('error', 'Some Error Ocurred');
             return res.redirect('/');
         }
     });

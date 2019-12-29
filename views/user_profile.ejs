@@ -2,3 +2,41 @@
         <h1>
             Codeial / Profile Page
         </h1>
+        <h3>
+            Profile:
+        </h3>
+        <br>
+        <br>
+
+        <section>
+            <p>Name: <%= profile.name %></p>
+            <p>Email: <%= profile.email %></p>
+            <% if(locals.user.id == profile.id){ %>
+                <form action="/users/update/<%= locals.user.id %>" method="POST">
+                    <input type="email" name="email" placeholder="Enter your email....">
+                    <input type="text" name="name" placeholder="Enter your name....">
+                    <input type="submit" value="Update Details">
+                </form>
+            <% } %>
+        </section>    
+        <br>
+        <br>
+
+
+        <section>
+            <h2>My Posts:</h2>
+            <ul>
+                <% for(mypost of myposts){ %>
+                    <p>
+                        <%= mypost.content %><br>
+                        <% if(locals.user && profile.id == locals.user.id){ %>
+                            <a href="/posts/destroy/<%= mypost.id %>">X</a>
+                        <% } %>
+                    </p>
+               <% } %>
+            </ul>
+          
+          
+        </section>    
+        <br>
+        <br>
