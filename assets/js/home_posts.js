@@ -54,10 +54,10 @@
             e.preventDefault();
 
             $.ajax({
-                type: 'delete',
+                type: 'get',
                 url : $(deleteLink).prop('href'),
                 success: function(data){
-                    $(`#post-${data.data.post._id}`).remove();
+                    $(`#post-${data.data.post_id}`).remove();
                 },
                 error: function(error){
                     console.log(error.responseText);
@@ -65,7 +65,9 @@
             });
         });
     }
+   
 
+   
 
     createPost();
 }
