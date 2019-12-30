@@ -5,7 +5,7 @@
 <section id="feed-posts">
     <h4>Posts</h4>
     <form action="/posts/create-Post" id="new-post-form" method="POST">
-        <textarea name="content" cols="40" rows="5"></textarea>
+        <textarea name="content" cols="40" rows="5" required id="postContent"></textarea>
         <input type="submit" value="Post">
     </form>
 </section>
@@ -28,3 +28,5 @@
     </section>
 <% } %>
 <br><br>
+
+<script src="/js/home_posts.js"></script>

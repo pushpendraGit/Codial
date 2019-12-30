@@ -12,7 +12,8 @@ module.exports.home = async function(req, res){
                     populate : {
                         path : 'user'
                     }
-                });
+                })
+                .sort({createdAt: 'descending'});
         let users = await User.find({});
         return res.render('home', {
             allposts: posts,

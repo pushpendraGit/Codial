@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="/css/layout.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <%- style %>
         
     </head>
@@ -26,6 +27,15 @@
                     theme: 'relax',
                     text: "<%= flash.success %>",
                     type: 'success',
+                    layout: 'topRight',
+                    timeout: 1500
+                }).show();
+            <% } %>
+            <% if(flash.error && flash.error.length>0){ %>
+                new Noty({
+                    theme: 'relax',
+                    text: "<%= flash.error %>",
+                    type: 'error',
                     layout: 'topRight',
                     timeout: 1500
                 }).show();
