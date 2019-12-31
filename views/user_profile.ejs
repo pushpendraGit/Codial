@@ -5,6 +5,10 @@
         <h3>
             Profile:
         </h3>
+        <% if(profile.avatar){ %>
+            <img src="<%= profile.avatar %>" width="150px" style="border-radius: 50%;">
+        <% } %>
+        
         <br>
         <br>
 
@@ -12,9 +16,10 @@
             <p>Name: <%= profile.name %></p>
             <p>Email: <%= profile.email %></p>
             <% if(locals.user.id == profile.id){ %>
-                <form action="/users/update/<%= locals.user.id %>" method="POST">
-                    <input type="email" name="email" placeholder="Enter your email....">
-                    <input type="text" name="name" placeholder="Enter your name....">
+                <form action="/users/update/<%= locals.user.id %>" method="POST" enctype="multipart/form-data">
+                    <input type="email" name="email" placeholder="Enter your email...." required>
+                    <input type="text" name="name" placeholder="Enter your name...." required>
+                    <input type="file" name = "avatar" placeholder="profile-pic">
                     <input type="submit" value="Update Details">
                 </form>
             <% } %>
@@ -40,3 +45,5 @@
         </section>    
         <br>
         <br>
+
+        

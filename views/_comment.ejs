@@ -3,5 +3,8 @@
 <% } %>
 <p>
     <%= comment.content %><br>
+    <% if(comment.user.avatar){ %>
+        <img src="<%= comment.user.avatar %>" width="30px" style="border-radius: 50%;">
+    <% } %>
     <small><%= comment.user.name %></small>
 </p>

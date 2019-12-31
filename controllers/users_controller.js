@@ -1,29 +1,9 @@
 const User = require('../models/user');
 const Post = require('../models/post');
+const fs = require('fs');
+const path = require('path');
 
 module.exports.profile = function(req, res){
-//   User.findById(req.params.id, function(err,user){
-    // console.log(user.posts);
-//     return res.render('user_profile', {
-//         title: 'User Profile',
-//         profile : user,
-        
-//     });
-//   });
-    
-
-    // User.findById(req.params.id)
-    // .populate('Post')
-    // .exec(
-    //     function(err,user){
-    //             console.log(user.posts);
-    //             return res.render('user_profile', {
-    //                 title: 'User Profile',
-    //                 profile : user,
-    //                 myposts : user.posts
-    //             });
-    //           }
-    // )
     User.findById(req.params.id)
     .populate('posts')
     .populate({
@@ -44,21 +24,40 @@ module.exports.profile = function(req, res){
     });
 };
 
-module.exports.update = function(req, res){
-    console.log(req.params, req.body);
-    if(req.user.id == req.params.id){
-        User.findByIdAndUpdate(req.params.id,{
-            email : req.body.email,
-            name : req.body.name
-        } ,function(err, user){
-            if(err){
-                console.log("ERRORRRRRR");
-                req.flash('error', 'Some Error Ocurred');
-                return res.redirect('back');
-            }
-        });
-        req.flash('success', 'Profile Updated Successfully');
-        return res.redirect('back');   
+module.exports.update = async function(req, res){
+    try{
+        if(req.user.id == req.params.id){
+
+            let user = await User.findById(req.params.id);
+            User.uploadedAvatar(req, res, function(err){
+                if(err){
+                    console.log(err);
+                    return res.redirect('back');
+                }
+                console.log(req.file);
+                user.name = req.body.name; //We wouldnt be able to read req.body without using multer
+                                           //as the form now has a different encryption type
+                user.email = req.body.email;
+                if(req.file){
+                    if(user.avatar){
+                        fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+                    }
+                    user.avatar = User.avatarPath+'/'+req.file.filename;
+                }
+                user.save();
+            });
+
+
+            req.flash('success', 'Profile Updated Successfully');
+            return res.redirect('back');   
+
+        }
+    }catch(err){
+
+        req.flash('error', 'Some Error Ocurred');
+        console.log(err);
+        return res.redirect('back');  
+
     }
 };
 

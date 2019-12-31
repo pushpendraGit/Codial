@@ -2,8 +2,11 @@
     <% if(locals.user && post.user.id == locals.user.id){ %>
         <a class="delete-post-button" href="/posts/destroy/<%= post.id %>">X</a>
     <% } %>
-    <p>
+        
         <%= post.content %><br>
+        <% if(post.user.avatar){ %>
+            <img src="<%= post.user.avatar %>" width="30px" style="border-radius: 50%;">
+        <% } %>
         <small><%= post.user.name %></small>
     </p>
     <div class="post-comments">
