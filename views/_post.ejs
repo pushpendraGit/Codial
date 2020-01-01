@@ -20,11 +20,7 @@
                 <% } %>
             <% } %>
         </div>
-        <!-- <%= post.uploadPic[0] %>
-        <video width="640"  controls>
-
-            <source src="<%= post.uploadPic[0] %>" type="video/mp4">
-          </video> -->
+       
         
    
     <div class="post-comments">
@@ -34,7 +30,7 @@
                 <div class="form-group green-border-focus">
                     <textarea class="form-control" id="postContent" rows="1" name="content" placeholder="type here..."></textarea>
                 </div>
-                <!-- <textarea name="content" rows="1" cols="30" placeholder="Add Comments..."></textarea> -->
+                
                 <input type="hidden" value="<%= post._id %>" name="post">
                 <div style="margin-top: 1rem;">
                     <button type="submit" class="btn btn-primary">Post</button>

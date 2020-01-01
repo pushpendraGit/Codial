@@ -12,13 +12,11 @@ module.exports.profile = function(req, res){
     //         path : 'user'
     //     }
     // })
-    .exec(function(err, user){
-       
+    .exec(function(err, user){       
         return res.render('user_profile', {
                     title: 'User Profile',
                     profile : user
                 });
-
     });
 };
 
