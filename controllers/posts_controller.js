@@ -19,28 +19,11 @@ module.exports.createPost = function(req, res){
                 return res.redirect('back');  
             }else{
                 
-                var picarr = []; 
-
-                // let j = 0;   
-                // while(req.files[j]){                  
-                //     let r = req.files[j];
-                //     if(r.mimetype==='image/jpeg'||r.mimetype==='image/gif'||r.mimetype==='image/png'){
-                //         console.log("TRUE");
-                //     }else{
-                //         req.flash('error', 'Only image files can be uploaded');
-                //         return res.redirect('back'); 
-                //     }
-                //     j++;
-                // }        
-
+                var picarr = [];
                 for(var i = 0; i<5; i++){
-                    if(req.files[i]){
-                        
+                    if(req.files[i]){                        
                         picarr[i] = Post.picPath + '/' + req.files[i].filename;
-                    }else{
-                        // req.flash('error', 'Only image files can be uploaded');
-                        // // console.log(err);
-                        // return res.redirect('back');   
+                    }else{  
                         break;            
                     }
                 }
@@ -58,6 +41,7 @@ module.exports.createPost = function(req, res){
                 };
                 abc();
                 req.flash('success', 'Post Created Successfully');
+               
                 return res.redirect('back');
             }
 

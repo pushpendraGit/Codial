@@ -6,21 +6,19 @@ const path = require('path');
 module.exports.profile = function(req, res){
     User.findById(req.params.id)
     .populate('posts')
-    .populate({
-        path : 'comments',
-        populate : {
-            path : 'user'
-        }
-    })
+    // .populate({
+    //     path : 'comments',
+    //     populate : {
+    //         path : 'user'
+    //     }
+    // })
     .exec(function(err, user){
-        Post.find({user: user}, function(err, posts){
-            // console.log(po)
-            return res.render('user_profile', {
-                title: 'User Profile',
-                profile : user,
-                myposts : posts
-            });
-        });
+       
+        return res.render('user_profile', {
+                    title: 'User Profile',
+                    profile : user
+                });
+
     });
 };
 

@@ -1,7 +1,8 @@
         <link rel="stylesheet" href="/css/user_profile.css">
-        
+        <br>
         <h3>
             <%= profile.name %>
+            
         </h3>
         <%= profile.email %><br><br>
         <% if(profile.avatar){ %>
@@ -30,22 +31,37 @@
         <br>
         <br>
 
-
         <section>
-            <h2>My Posts:</h2>
+            <h2>Posts by <%= profile.name %>:</h2>
             <ul>
-                <% for(mypost of myposts){ %>
-                    <p>
-                        <%= mypost.content %><br>
-                        <% if(locals.user && profile.id == locals.user.id){ %>
-                            <a href="/posts/destroy/<%= mypost.id %>">X</a>
+                <% for(post of profile.posts){ %>
+                    <li style="list-style: none;">
+                        <% if(profile.avatar){ %>
+                            <img src="<%= profile.avatar %>" width="30px" style="border-radius: 50%;">
                         <% } %>
-                    </p>
-               <% } %>
+                        <small><%= profile.name %></small>
+                        <% if(locals.user && profile.id == locals.user.id){ %>
+                            <a class="delete-post-button" href="/posts/destroy/<%= post.id %>">Delete</a>
+                        <% } %>
+                        <br>
+                        <%= post.content %><br>
+                       
+                        <div>
+                            <% if(post.uploadPic[0]){ %>
+                                <% for(var i=0; i<5; i++) { %>
+                                    <% if(post.uploadPic[i]){ %>
+                                        <img src="<%= post.uploadPic[i] %>" alt="USER PIC" width="300">
+                                    <% } %>
+                                <% } %>
+                            <% } %>
+                        </div>
+                    </li><br><br>
+                <% } %>
             </ul>
           
           
         </section>    
+        
         <br>
         <br>
 
