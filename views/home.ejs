@@ -1,12 +1,31 @@
-<h1>
-    Codeial / <%= title %>
-</h1>
+
 <% if(locals.user) {%>
 <section id="feed-posts">
     <h4>Posts</h4>
-    <form action="/posts/create-Post" id="new-post-form" method="POST" >
-        <textarea name="content" cols="40" rows="5" required id="postContent"></textarea>
-        <input type="submit" value="Post">
+    <form action="/posts/create-Post" id="new-post-form" method="POST" enctype="multipart/form-data">
+
+
+
+        <div class="form-group green-border-focus">
+            <textarea class="form-control" id="postContent" rows="7" name="content" placeholder="type here..."></textarea>
+        </div>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile" name="uploadPic" multiple='multiple'>
+            <label class="custom-file-label" for="uploadPic">Upload Images...</label>
+        </div>
+        <div style="margin-top: 1rem;">
+            <button type="submit" class="btn btn-primary">Post</button>
+        </div>
+        
+
+
+
+
+
+<!-- 
+        
+        <input type="file" name="uploadPic" multiple='multiple' accept='image/*' placeholder="uploadPic">
+        <input type="submit" value="Post"> -->
     </form>
 </section>
 <% } %>
@@ -30,3 +49,6 @@
 <br><br>
 
 <script src="/js/home_posts.js"></script>
+
+
+<!-- accept='image/*' -->

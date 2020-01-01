@@ -1,0 +1,14 @@
+li{
+    list-style: none;
+}
+.delete-post-button, .delete-comment-button{
+    color: red;
+    font-size: 0.7rem;
+}
+.delete-post-button:hover, .delete-comment-button:hover{
+    color: darkred;
+    text-decoration: none;
+}
+.post-comments{
+    margin-top: 2vh;
+}

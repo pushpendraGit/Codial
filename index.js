@@ -11,6 +11,7 @@ const passportLocal = require('./config/passport-local-strategy');
 const MongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 const customMWare = require('./config/middleware');
+const passportGoogle = require('./config/passport-google-oauth2-strategy');
 
 app.use(express.urlencoded());
 

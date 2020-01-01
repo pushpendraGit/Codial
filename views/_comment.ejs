@@ -1,10 +1,13 @@
-<% if(locals.user && comment.user.id == locals.user.id){ %>
-    <a href="/comments/destroy/<%= comment.id %>">X</a>
-<% } %>
+
 <p>
-    <%= comment.content %><br>
+    
     <% if(comment.user.avatar){ %>
-        <img src="<%= comment.user.avatar %>" width="30px" style="border-radius: 50%;">
+        <img src="<%= comment.user.avatar %>" width="30p" style="border-radius: 50%;">
     <% } %>
     <small><%= comment.user.name %></small>
+    <% if(locals.user && comment.user.id == locals.user.id){ %>
+        <a href="/comments/destroy/<%= comment.id %>" class="delete-comment-button">Delete</a>
+    <% } %>
+    <br>
+    &nbsp;&nbsp;<%= comment.content %>
 </p>

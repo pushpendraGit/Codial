@@ -14,9 +14,15 @@ router.post('/update/:id',passport.checkAuthentication, usersController.update);
 // use passport as a middleware to authenticate
 router.post('/create-session', passport.authenticate(
     'local',
-    {failureRedirect: '/'},
+    {failureRedirect: '/sign-in'},
 ), usersController.createSession);
 
+router.get('/auth/google', passport.authenticate('google', {
+    scope: ['profile', 'email']
+}))
 
+router.get('/auth/google/callback', passport.authenticate('google', {
+    failureRedirect: '/sign-in'
+}), usersController.createSession);
 
 module.exports = router;

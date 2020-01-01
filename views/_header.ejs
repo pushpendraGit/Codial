@@ -1,14 +1,39 @@
 <header>
-    Page Header
-    <br>
-    <ul>
-        <% if(locals.user){ %>
-            <li><a href="/users/profile/<%= locals.user.id %>"><%= locals.user.name %></a></li>
-            <li><a href="/">Home</a></li>
-            <li><a href="/users/sign-out">Sign-Out</a></li>
-        <% }else{ %>
-            <li><a href="/sign-in">Sign-In</a></li>
-            <li><a href="/sign-up">Sign-Up</a></li>
-        <% } %>
-    </ul>
+    
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"><%= title  %></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown" style="margin-left: 40px;">
+          <ul class="navbar-nav">
+
+            <% if(locals.user){ %>
+               
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/users/profile/<%= locals.user.id %>"><%= locals.user.name %></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/sign-out">Sign-Out</a>
+                </li>
+            <% }else{ %>
+                <li class="nav-item" style="margin-right: 10px;">
+                    <a class="nav-item" href="/sign-in">Sign-In </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item" href="/sign-up"> Sign-Up</a>
+                </li>
+            <% } %>
+
+          </ul>
+        </div>
+      </nav>
+
+
+
 </header>

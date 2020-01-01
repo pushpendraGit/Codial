@@ -1,10 +1,9 @@
         <link rel="stylesheet" href="/css/user_profile.css">
-        <h1>
-            Codeial / Profile Page
-        </h1>
+        
         <h3>
-            Profile:
+            <%= profile.name %>
         </h3>
+        <%= profile.email %><br><br>
         <% if(profile.avatar){ %>
             <img src="<%= profile.avatar %>" width="150px" style="border-radius: 50%;">
         <% } %>
@@ -13,14 +12,18 @@
         <br>
 
         <section>
-            <p>Name: <%= profile.name %></p>
-            <p>Email: <%= profile.email %></p>
+            
+            
             <% if(locals.user.id == profile.id){ %>
+                <h6>Update Details :</h6>
                 <form action="/users/update/<%= locals.user.id %>" method="POST" enctype="multipart/form-data">
                     <input type="email" name="email" placeholder="Enter your email...." required>
                     <input type="text" name="name" placeholder="Enter your name...." required>
                     <input type="file" name = "avatar" placeholder="profile-pic">
-                    <input type="submit" value="Update Details">
+                    <!-- <input type="submit" value="Update Details"> -->
+                    <div style="margin-top: 1rem;">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
                 </form>
             <% } %>
         </section>    

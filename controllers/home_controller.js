@@ -18,7 +18,7 @@ module.exports.home = async function(req, res){
         return res.render('home', {
             allposts: posts,
             allusers: users,
-            title: "Home"
+            title: "Codeial | Home"
         }); 
     }catch(err){
         console.log(err)
