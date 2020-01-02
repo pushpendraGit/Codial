@@ -4,7 +4,8 @@
     <% if(comment.user.avatar){ %>
         <img src="<%= comment.user.avatar %>" width="30p" style="border-radius: 50%;">
     <% } %>
-    <small><%= comment.user.name %></small>
+    <!-- <small><%= comment.user.name %></small> -->
+    <small><a href="/users/profile/<%= comment.user.id %>"><%= comment.user.name %></a></small>
     <% if(locals.user && comment.user.id == locals.user.id){ %>
         <a href="/comments/destroy/<%= comment.id %>" class="delete-comment-button">Delete</a>
     <% } %>

@@ -4,7 +4,8 @@
         <% if(post.user.avatar){ %>
             <img src="<%= post.user.avatar %>" width="30px" style="border-radius: 50%;">
         <% } %>
-        <small><%= post.user.name %></small>
+        <small><a href="/users/profile/<%= post.user.id %>"><%= post.user.name %></a></small>
+        <!-- <small><%= post.user.name %></small> -->
         <% if(locals.user && post.user.id == locals.user.id){ %>
             <a class="delete-post-button" href="/posts/destroy/<%= post.id %>">Delete</a>
         <% } %>
@@ -49,4 +50,4 @@
             </ul>
         </div>
     </div>
-</li>
+</li><br>

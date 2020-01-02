@@ -5,15 +5,44 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports.profile = function(req, res){
+    // User.findById(req.params.id)
+    // .populate('posts')
+    // .exec(function(err, user){       
+    //    return res.render('user_profile', {
+    //                 title: 'User Profile',
+    //                 profile : user
+    //             });
+    // });  
+
     User.findById(req.params.id)
-    .populate('posts')
+    .populate({
+        path : 'posts',
+        populate : {
+            path : 'comments',
+            model: 'Comment',
+            select:{
+                createdAt:0,
+                updatedAt:0
+            },
+            populate:{
+                path: 'user',
+                model: 'User',
+                select:{
+                    posts:0,
+                    email: 0,
+                    password:0,
+                    createdAt:0,
+                    updatedAt:0
+                }
+            }
+        }
+    })
     .exec(function(err, user){       
        return res.render('user_profile', {
                     title: 'User Profile',
                     profile : user
                 });
     });
-    
     
 };
 

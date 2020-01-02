@@ -1,33 +1,38 @@
         <link rel="stylesheet" href="/css/user_profile.css">
         <br>
-        
+       
         <h3>
             <%= profile.name %>
         </h3>
-        <%= profile.email %><br><br>
+        <% if(locals.user){ %>
+            <%= profile.email %>
+        <% } %>
+        <br><br>
         <% if(profile.avatar){ %>
             <img src="<%= profile.avatar %>" width="150px" style="border-radius: 50%;">
         <% } %>
         
         <br>
         <br>
-
-        <section>
-            
-            
-            <% if(locals.user.id == profile.id){ %>
-                <h6>Update Details :</h6>
-                <form action="/users/update/<%= locals.user.id %>" method="POST" enctype="multipart/form-data">
-                    <input type="email" name="email" placeholder="Enter your email...." required>
-                    <input type="text" name="name" placeholder="Enter your name...." required>
-                    <input type="file" name = "avatar" placeholder="profile-pic">
-                    <!-- <input type="submit" value="Update Details"> -->
-                    <div style="margin-top: 1rem;">
-                        <button type="submit" class="btn btn-primary">Update</button>
-                    </div>
-                </form>
-            <% } %>
-        </section>    
+    
+        <% if(locals.user){ %>
+            <section>
+        
+                <% if(locals.user.id == profile.id){ %>
+                    <h6>Update Details :</h6>
+                    <form action="/users/update/<%= locals.user.id %>" method="POST" enctype="multipart/form-data">
+                        <input type="email" name="email" placeholder="Enter your email...." required>
+                        <input type="text" name="name" placeholder="Enter your name...." required>
+                        <input type="file" name = "avatar" placeholder="profile-pic">
+                        <!-- <input type="submit" value="Update Details"> -->
+                        <div style="margin-top: 1rem;">
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
+                <% } %>
+            </section>    
+        <% } %>
+        
         <br>
         <br>
 
@@ -55,6 +60,17 @@
                                 <% } %>
                             <% } %>
                         </div>
+                        <ul>
+                            <% for(comment of post.comments){ %>
+                                <li>
+                                    <!-- <p><%= comment.content %></p>
+                                    <p><%= comment.user.name %></p>                            
+                                    <p><%= comment.user.avatar %></p> -->
+                                    
+                                    <%- include('_comment.ejs') -%>
+                                </li>
+                            <% } %>
+                        </ul>
                     </li><br><br>
                 <% } %>
             </ul>
