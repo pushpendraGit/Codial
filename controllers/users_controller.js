@@ -1,23 +1,20 @@
 const User = require('../models/user');
 const Post = require('../models/post');
+const Comment = require('../models/comment');
 const fs = require('fs');
 const path = require('path');
 
 module.exports.profile = function(req, res){
     User.findById(req.params.id)
     .populate('posts')
-    // .populate({
-    //     path : 'comments',
-    //     populate : {
-    //         path : 'user'
-    //     }
-    // })
     .exec(function(err, user){       
-        return res.render('user_profile', {
+       return res.render('user_profile', {
                     title: 'User Profile',
                     profile : user
                 });
     });
+    
+    
 };
 
 module.exports.update = async function(req, res){
