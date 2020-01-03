@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="/css/post.css">
+
 <li id="post-<%= post._id %>" style="margin-top: 2rem;">
     
         <% if(post.user.avatar){ %>
@@ -10,7 +11,11 @@
             <a class="delete-post-button" href="/posts/destroy/<%= post.id %>">Delete</a>
         <% } %>
         <br><br>
-        <%= post.content %><br>
+        
+        
+            <%- post.content %>
+        
+        
        
         <div>
             <% if(post.uploadPic[0]){ %>
@@ -20,7 +25,12 @@
                     <% } %>
                 <% } %>
             <% } %>
-        </div>
+        </div><br>
+        <% if(locals.user){ %>
+            <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
+        <% } %>
+        
+
        
         
    

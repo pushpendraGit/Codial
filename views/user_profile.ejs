@@ -48,8 +48,8 @@
                         <% if(locals.user && profile.id == locals.user.id){ %>
                             <a class="delete-post-button" href="/posts/destroy/<%= post.id %>">Delete</a>
                         <% } %>
-                        <br>
-                        <%= post.content %><br>
+                        <br><br>
+                        <%- post.content %><br>
                        
                         <div>
                             <% if(post.uploadPic[0]){ %>

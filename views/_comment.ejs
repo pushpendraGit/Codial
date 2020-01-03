@@ -10,5 +10,9 @@
         <a href="/comments/destroy/<%= comment.id %>" class="delete-comment-button">Delete</a>
     <% } %>
     <br>
-    &nbsp;&nbsp;<%= comment.content %>
+    &nbsp;&nbsp;<%= comment.content %><br>
+    <% if(locals.user){ %>
+        &nbsp;&nbsp;<a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
+    <% } %>
+    <br>
 </p>

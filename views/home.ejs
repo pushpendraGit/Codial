@@ -1,14 +1,18 @@
 
 <% if(locals.user) {%>
+<script src="https://cdn.ckeditor.com/4.9.1/standard/ckeditor.js"></script>
 <section id="feed-posts">
     <h4>Posts</h4>
     <form action="/posts/create-Post" id="new-post-form" method="POST" enctype="multipart/form-data">
 
-
-
-        <div class="form-group green-border-focus">
+        <textarea name="content" class="form-control" id="postContent" placeholder="type here..."></textarea>
+        <script>
+            CKEDITOR.replace( 'content' );
+        </script>
+        
+        <!-- <div class="form-group green-border-focus">
             <textarea class="form-control" id="postContent" rows="7" name="content" placeholder="type here..."></textarea>
-        </div>
+        </div> -->
         <div class="custom-file">
             <input type="file" class="custom-file-input" id="customFile" name="uploadPic" multiple='multiple' accept='image/*'>
             <label class="custom-file-label" for="uploadPic">Upload Images...</label>
