@@ -23,7 +23,13 @@ const postSchema = new mongoose.Schema({
     ],
     uploadPic: [{
         type: String
-    }]
+    }],
+    likes: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Like'
+        }
+    ]
 },{
     timestamps: true
 });

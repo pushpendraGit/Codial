@@ -25,12 +25,22 @@
                     <% } %>
                 <% } %>
             <% } %>
-        </div><br>
+        </div>
         <% if(locals.user){ %>
-            <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
+            &nbsp;&nbsp;<a href="/likes/toggle/?id=<%= post._id %>&type=Post" type="Post"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
+        <% }else{ %>
+            &nbsp;&nbsp;<i class="fa fa-thumbs-o-up" aria-hidden="true" style="color: lightblue;"></i>
         <% } %>
+        <% var pstLikeCNT = 0 %>
         
-
+        <% for(postLike of post.likes){ %>
+            <% if(postLike){ %>
+                <% pstLikeCNT++ %>
+            <% } %>
+        <% } %>
+        <%= pstLikeCNT %>
+        
+                <br>
        
         
    

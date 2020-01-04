@@ -1,9 +1,9 @@
 const User = require('../models/user');
 const Post = require('../models/post');
 const Comment = require('../models/comment');
+const Like = require('../models/like');
 var fs = require('fs');
 const path = require('path');
-var multer = require('multer')
 
 module.exports.createPost = function(req, res){
         Post.uploadedPic(req, res, function(err){
@@ -85,15 +85,39 @@ module.exports.destroyPost = async function(req,res){
     try{        
         let post = await Post.findById(req.params.id);
         if(post.user == req.user.id){
+            
             if(post.uploadPic[0]){
                 for(var i=0; i<5; i++){
                     if(post.uploadPic[i]){
                         var filePath = path.join(__dirname, '..', post.uploadPic[i]);
                         fs.unlinkSync(filePath);
-                    }else{break;}
+                    }else{
+                        break;
+                    }
                 }
             }
-    
+
+            await Like.deleteMany({
+                likedObjId:post._id, 
+                onModel:'Post'
+            });
+
+            // await Like.deleteMany({
+            //    _id: {
+            //        $in: post.comments
+            //    }
+            // });
+            var i=0;
+            while(post.comments[i]){
+                console.log(post.comments[i]);
+                await Like.deleteOne({
+                    likedObjId: post.comments[i]
+                })
+                i++;
+            }
+            // console.log(post.comments[0]);
+            // await Like.deleteMany({_id: {$in: post.comments}});
+
             let user_id = await  post.user;
             post.remove();
 

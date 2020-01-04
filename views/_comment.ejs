@@ -12,7 +12,18 @@
     <br>
     &nbsp;&nbsp;<%= comment.content %><br>
     <% if(locals.user){ %>
-        &nbsp;&nbsp;<a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
+        &nbsp;&nbsp;<a href="/likes/toggle/?id=<%= comment._id %>&type=Comment" type="Post"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
+    <% }else{ %>
+        &nbsp;&nbsp;<i class="fa fa-thumbs-o-up" aria-hidden="true" style="color: lightblue;"></i>
     <% } %>
+    <% var cmtLikeCNT = 0 %>
+    <% for(commentLike of comment.likes){ %>
+        <% if(commentLike){ %>
+            <% cmtLikeCNT++ %>
+        <% } %>
+    <% } %>
+    <%= cmtLikeCNT %>
+        
+    
     <br>
 </p>

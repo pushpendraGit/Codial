@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const Post = require('../models/post');
 const Comment = require('../models/comment');
+const Like = require('../models/like');
 const commentMailer = require('../mailers/comments-mailer');
 
 module.exports.createComment = async function(req, res){
@@ -58,6 +59,14 @@ module.exports.deleteComment = function(req, res){
     Comment.findById(req.params.id, function(err, comment){
         if(comment.user == req.user.id){
             let post_id = comment.post;
+            let abc = async function(){
+                await Like.deleteMany({
+                    likedObjId:comment._id, 
+                    onModel:'Comment'
+                });
+            }
+            abc();
+
             comment.remove();
             Post.findByIdAndUpdate(post_id, {
                 $pull : {
