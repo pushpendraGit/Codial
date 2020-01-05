@@ -5,16 +5,11 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports.profile = function(req, res){
-    // User.findById(req.params.id)
-    // .populate('posts')
-    // .exec(function(err, user){       
-    //    return res.render('user_profile', {
-    //                 title: 'User Profile',
-    //                 profile : user
-    //             });
-    // });  
-
+    
     User.findById(req.params.id)
+    .populate({
+        path: 'friends'
+    })
     .populate({
         path : 'posts',
         populate : {
@@ -38,9 +33,19 @@ module.exports.profile = function(req, res){
         }
     })
     .exec(function(err, user){       
-       return res.render('user_profile', {
+        let isFriend=false;
+        for(friendship of user.friends){
+            // console.log(friendship);
+            // console.log(req.user._id);
+            if(friendship.user_id==req.user.id || friendship.friend_id==req.user.id){
+                isFriend = true;
+                break;
+            }
+        }
+        return res.render('user_profile', {
                     title: 'User Profile',
-                    profile : user
+                    profile : user,
+                    isFriend : isFriend
                 });
     });
     

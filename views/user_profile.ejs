@@ -16,6 +16,17 @@
         <br>
     
         <% if(locals.user){ %>
+           
+            <% if(locals.user && locals.user.id != profile.id){ %>
+                <a href="/friends/toggle-friend/<%= profile._id %>" class="btn btn-info" role="button">
+                    <% if(isFriend){ %>
+                        Unfriend 
+                    <% }else{ %>
+                         Add Friend   
+                    <% } %>
+                </a>
+                
+            <% } %>
             <section>
         
                 <% if(locals.user.id == profile.id){ %>
@@ -44,6 +55,7 @@
                         <% if(profile.avatar){ %>
                             <img src="<%= profile.avatar %>" width="30px" style="border-radius: 50%;">
                         <% } %>
+                        
                         <small><%= profile.name %></small>
                         <% if(locals.user && profile.id == locals.user.id){ %>
                             <a class="delete-post-button" href="/posts/destroy/<%= post.id %>">Delete</a>

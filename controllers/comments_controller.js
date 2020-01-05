@@ -5,29 +5,7 @@ const Like = require('../models/like');
 const commentMailer = require('../mailers/comments-mailer');
 
 module.exports.createComment = async function(req, res){
-    
-    // Post.findById(req.body.post, function(err,post){
-       
-    //     if(post){
 
-    //         Comment.create({
-    //             content: req.body.content,
-    //             post: req.body.post,
-    //             user: req.user._id
-    //         }, function(err, comment){
-    //             if(err){
-    //                 console.log("Error in Publishing Comment !!!", err);
-    //                 return res.redirect('back');
-    //             }
-    //             post.comments.push(comment);
-    //             post.save();
-                
-    //             commentMailer.newComment(comment);
-    //             return res.redirect('back');
-    //         })
-    //         req.flash('success', 'Comment Created Successfully');
-    //     }
-    // });   
     try{
         let post = await Post.findById(req.body.post);
         if(post){

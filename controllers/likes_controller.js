@@ -4,7 +4,7 @@ const Post = require('../models/post');
 
 module.exports.toggleLike = async function(req,res){
     try{
-        // console.log(req.user._id);
+        
         let likedObjId;
         let deleted = false;
 
@@ -12,8 +12,6 @@ module.exports.toggleLike = async function(req,res){
             likedObjId = await Post.findById(req.query.id).populate('likes');
         }else if(req.query.type == 'Comment'){
             likedObjId = await Comment.findById(req.query.id).populate('likes');
-            // console.log(comment);
-            // console.log(likedObjId);
         }else{
             req.flash('error', "Don't Fiddle with our code");
             return res.redirect('/');
@@ -32,7 +30,7 @@ module.exports.toggleLike = async function(req,res){
 
             existingLike.remove();
             req.flash('success', 'Like successfully removed');
-             deleted = true;
+            deleted = true;
         }else{
             let newLike = await Like.create({
                 user: req.user._id,

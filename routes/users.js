@@ -4,12 +4,14 @@ const passport = require('passport');
 
 const usersController = require('../controllers/users_controller');
 const postsController = require('../controllers/posts_controller');
+const friendsController = require('../controllers/friends_Controller');
 
 
 // router.get('/profile/:id', passport.checkAuthentication, usersController.profile);
 
 
 router.get('/profile/:id', usersController.profile);
+router.get('/friends', friendsController.renderPage);
 router.get('/sign-out', usersController.signOut);
 router.post('/update/:id',passport.checkAuthentication, usersController.update);
 

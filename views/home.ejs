@@ -5,7 +5,7 @@
     <h4>Posts</h4>
     <form action="/posts/create-Post" id="new-post-form" method="POST" enctype="multipart/form-data">
 
-        <textarea name="content" class="form-control" id="postContent" placeholder="type here..."></textarea>
+        <textarea name="content" class="form-control" id="postContent" placeholder="type here..." required></textarea>
         <script>
             CKEDITOR.replace( 'content' );
         </script>
@@ -53,7 +53,7 @@
 <% } %>
 <br><br>
 
-<script src="/js/home_posts.js"></script>
-
+<!-- <script src="/js/home_posts.js"></script> -->
+<%- include('chatbox') -%>
 
 <!-- accept='image/*' -->
