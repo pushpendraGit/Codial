@@ -12,6 +12,14 @@ const MongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 const customMWare = require('./config/middleware');
 const passportGoogle = require('./config/passport-google-oauth2-strategy');
+const passportJWT = require('./config/passport-jwt-strategy');
+
+
+// const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
+// const chatServer = require('http').Server(app);
+// chatServer.listen(5000);
+// console.log("Chat server: 5000");
+
 
 app.use(express.urlencoded());
 
