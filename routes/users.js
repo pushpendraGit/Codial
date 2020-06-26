@@ -12,6 +12,7 @@ const friendsController = require('../controllers/friends_Controller');
 
 router.get('/profile/:id', usersController.profile);
 router.get('/friends', friendsController.renderPage);
+router.get('/friend-requests', friendsController.friendRequests);
 router.get('/sign-out', usersController.signOut);
 router.post('/update/:id',passport.checkAuthentication, usersController.update);
 

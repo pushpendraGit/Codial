@@ -1,0 +1,10 @@
+<h1>HI</h1>
+<% for(wannaBeFriend of friendRequests){ %>
+   
+
+    <img src="<%= wannaBeFriend.user_id.avatar %>" width="40" style="border-radius: 50%;">
+    <a href="/users/profile/<%= wannaBeFriend.user_id._id %>"><%= wannaBeFriend.user_id.name %></a> 
+    <a class="btn btn-primary" href="/friends/AcceptfriendRequest/<%= wannaBeFriend._id %>" role="button">Accept</a><br><br>
+
+
+<% } %>

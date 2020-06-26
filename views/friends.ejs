@@ -2,6 +2,7 @@
 <h2>Your Friends</h2>
 <br><br>
 <% for(friend of friends){ %> 
+   
     <% if(friend.user_id.id==locals.user.id){ %>
         <img src="<%= friend.friend_id.avatar %>" width="40" style="border-radius: 50%;">
         <a href="/users/profile/<%= friend.friend_id._id %>"><%= friend.friend_id.name %></a> 
@@ -9,7 +10,8 @@
     <% }else{ %>
         <img src="<%= friend.user_id.avatar %>" width="40" style="border-radius: 50%;">
         <a href="/users/profile/<%= friend.user_id._id %>"><%= friend.user_id.name %></a> 
-        <a class="btn btn-primary" href="#" role="button">Unfriend</a><br><br>
+        <a class="btn btn-primary" href="/friends/toggle-friend/<%= friend.user_id._id %>" role="button">Unfriend</a><br><br>
     <% } %>
     
 <% } %>
+

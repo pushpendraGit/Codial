@@ -1,0 +1,47 @@
+<link rel="stylesheet" href="/css/all_friend.css">
+
+<% if(locals.user){ %>
+
+    <% for(user of users){ %>
+
+        <li> 
+
+
+            
+
+
+
+<% if(user.avatar){ %>
+    <img src="<%= user.avatar %>" width="100px" style="border-radius: 50%;">
+<% } %>
+
+<span class="uname">
+
+
+    <a href="/users/profile/<%= user.id %>"><%= user.name %></a>
+
+
+
+
+   
+
+
+</span>
+
+
+
+
+
+
+
+
+        </li>
+
+
+
+
+        <% } %>
+
+
+
+    <% } %>

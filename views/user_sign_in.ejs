@@ -1,9 +1,30 @@
-<h1>Sign In</h1>
+<link rel="stylesheet" href="/css/log_in.css">
 
+<div id="container">
+<div class="content">
+    <div class="text">
+Login Form</div>
 <form action="/users/create-session" method="POST">
-    <input type="email" name="email" placeholder="Email"  required>
-    <input type="password" name="password" placeholder="Password"  required>
-    <input type="submit" value="Sign In">
-</form>
-OR
+      <div class="field">
+        <input type="email" name="email"   required>
+        <span class="fas fa-user"></span>
+        <label>Email</label>
+      </div>
+<div class="field">
+    <input type="password" name="password"  required>
+        <span class="fas fa-lock"></span>
+        <label>Password</label>
+      </div>
+<div class="forgot-pass">
+<a href="#">Forgot Password?</a></div>
+<button type="submit">Sign in</button>
+      <div class="sign-up">
+Not a member?
 <a href="/users/auth/google">Sign in With Google</a>
+      </div>
+</form>
+</div>
+</div>
+
+
+

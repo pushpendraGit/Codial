@@ -34,18 +34,35 @@ module.exports.profile = function(req, res){
     })
     .exec(function(err, user){       
         let isFriend=false;
+        let ispending = false;
         for(friendship of user.friends){
+            // console.log("in users controller")
             // console.log(friendship);
-            // console.log(req.user._id);
+            // // console.log(req.user._id);
+
+            
+
+            //for finding is request is pending or accepted
+
             if(friendship.user_id==req.user.id || friendship.friend_id==req.user.id){
+                 
+                ispending = true;
+            }
+
+
+            if((friendship.user_id==req.user.id || friendship.friend_id==req.user.id) && (friendship.request_accepted)){
                 isFriend = true;
+                ispending = false;
                 break;
             }
         }
+
+       
         return res.render('user_profile', {
                     title: 'User Profile',
                     profile : user,
-                    isFriend : isFriend
+                    isFriend : isFriend,
+                    ispending:ispending
                 });
     });
     

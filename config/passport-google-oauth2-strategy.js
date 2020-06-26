@@ -17,12 +17,9 @@ passport.use(new googleStrategy({
                 console.log("PASSPORT ERROR !!!");
                 return;
             }
-            // console.log(profile);
-            // console.log("PIc:",profile.photos[0].value);
             if(user){
                 return done(null, user);
             }else{
-                // console.log("PIc:",profile.photos[0].value);
                 User.create({
                     name: profile.displayName,
                     email: profile.emails[0].value,

@@ -1,4 +1,4 @@
-
+<link rel="stylesheet" href="/css/post.css">
 <% if(locals.user) {%>
 <script src="https://cdn.ckeditor.com/4.9.1/standard/ckeditor.js"></script>
 <section id="feed-posts">
@@ -34,7 +34,7 @@
     </form>
 </section>
 <% } %>
-<section>
+<section id="allPost">
     <div id="post-list-container">
         <ul>
             <% for(post of allposts){ %>    
@@ -44,6 +44,7 @@
     </div>
 </section>
 <br><br>
+<section id="all-user">
 <% if(locals.user){ %>
     <section>
         <% for(user of allusers){ %>
@@ -52,11 +53,14 @@
     </section>
 <% } %>
 <br><br>
+</section>
 
-<!-- <script src="/js/home_posts.js"></script> -->
-<!-- <%- include('chatbox') -%> -->
+<%- include('_chat_box'); -%>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 <script src="/js/chat_engine.js"></script>
-
-<!-- accept='image/*' -->
+<% if (locals.user){ %>
+<script>
+    new ChatEngine('user-chat-box', '<%= locals.user.email %>')
+</script>
+<% } %>

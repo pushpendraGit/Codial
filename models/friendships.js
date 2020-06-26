@@ -8,6 +8,10 @@ const friendsSchema = new mongoose.Schema({
     friend_id:{
         type : mongoose.Schema.Types.ObjectId,
         ref : 'User'
+    },
+    request_accepted:{
+        type: Boolean,
+        default: false
     }
 },{
     timestamps: true

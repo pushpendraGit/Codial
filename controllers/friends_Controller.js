@@ -62,7 +62,7 @@ module.exports.toggleFriend = async function(req, res){
     
             user.save();
             friendId.save();
-            req.flash('success', 'Friend added');
+            req.flash('success', 'Friend request Sent');
             return res.redirect('back');
         }
     }catch(err){
@@ -84,6 +84,8 @@ module.exports.renderPage = async function(req, res){
                     user_id: req.user._id
                 }
             ]
+            ,
+            request_accepted: true
         })
         .populate({
             path: 'friend_id',
@@ -103,4 +105,44 @@ module.exports.renderPage = async function(req, res){
         return res.redirect('/');
     }
     
+};
+
+
+module.exports.friendRequests = async function(req, res){
+    // console.log("This page will show all the friend requsts");
+    let friends = await Friendships.find({
+        // friend_id : req.user._id,
+        
+
+
+        $and:[
+            {
+                friend_id: req.user._id
+            },
+            {
+                request_accepted: false
+            }
+           
+        ]
+
+    }).populate({
+        path: 'user_id',
+        model: 'User'
+    });
+    // friends = await friends.populate('user', 'name avatar').execPopulate();
+
+    return res.render('friend_requests.ejs',{
+        title: "Friend Requests",
+        friendRequests : friends
+    });
+}
+
+module.exports.requestAccepted = async function(req, res){
+    console.log("Done!!!", req.params);
+    let friend = await Friendships.findById(req.params.id);
+    console.log(friend);
+    await friend.update({
+        request_accepted: true
+    })
+    return res.redirect('/');
 }
