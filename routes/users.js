@@ -26,6 +26,8 @@ router.get('/auth/google', passport.authenticate('google', {
     scope: ['profile', 'email']
 }))
 
+router.post('/create', usersController.create)
+
 router.get('/auth/google/callback', passport.authenticate('google', {
     failureRedirect: '/sign-in'
 }), usersController.createSession);

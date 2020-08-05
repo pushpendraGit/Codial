@@ -60,10 +60,10 @@
 <br>
 
 <section>
-    <h2>Posts by <%= profile.name %>:</h2>
+    <h2 class="he">Posts by <%= profile.name %>:</h2>
     <ul>
         <% for(post of profile.posts){ %>
-            <li style="list-style: none;">
+            <li style="list-style: none;" class="profile-post">
                 <% if(profile.avatar){ %>
                     <img src="<%= profile.avatar %>" width="30px" style="border-radius: 50%;">
                 <% } %>

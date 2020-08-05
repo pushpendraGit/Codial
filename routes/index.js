@@ -18,7 +18,7 @@ router.use('/likes', require('./likes'));
 
 router.get('/sign-up', usersController.signUp); //display the sign-in page
 router.get('/sign-in', usersController.signIn); //display the sign-up page
-router.post('/create', usersController.create); //create a new user in the database through the signup form
+// router.post('/create', usersController.create); //create a new user in the database through the signup form
 
 // for any further routes, access from here
 // router.use('/routerName', require('./routerfile));

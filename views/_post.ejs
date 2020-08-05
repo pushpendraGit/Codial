@@ -1,87 +1,96 @@
-<link rel="stylesheet" href="/css/post.css">
+<link rel="stylesheet" href="/css/post.css" />
 
-<li id="post-<%= post._id %>" style="margin-top: 2rem;  " class="list-i">
+<li id="post-<%= post._id %>" style="margin-top: 2rem;" class="list-i">
+  <div class="post-av-co">
+    <% if(post.user.avatar){ %>
+
+    <img src="<%= post.user.avatar %>" class="post-avtar" />
+
+    <% } %>
+
+
+    <small>
+        <% if(locals.user){ %>
+     
+      <a href="/users/profile/<%= post.user.id %>" class="post-user-name"
+        ><%= post.user.name %></a
+      >
+      <% } %>
     
-    <div class="post-av-co">
-        <% if(post.user.avatar){ %>
-            
-            <img src="<%= post.user.avatar %>" class="post-avtar">
-           
+    </small>
+
+
+    <!-- <small><%= post.user.name %></small> -->
+    <% if(locals.user && post.user.id == locals.user.id){ %>
+    <a class="delete-post-button" href="/posts/destroy/<%= post.id %>"
+      >Delete</a
+    >
+    <% } %>
+  </div>
+  <br /><br />
+
+  <div class="post-content">
+    <%- post.content %>
+  </div>
+
+  <div class="post-pic">
+    <% if(post.uploadPic[0]){ %> <% for(var i=0; i<5; i++) { %> <%
+    if(post.uploadPic[i]){ %>
+    <img src="<%= post.uploadPic[i] %>" alt="USER PIC" class="pic" />
+    <% } %> <% } %> <% } %>
+  </div>
+  <% if(locals.user){ %> &nbsp;&nbsp;<a
+    href="/likes/toggle/?id=<%= post._id %>&type=Post"
+    type="Post"
+  >
+    <img
+      src="https://www.flaticon.com/premium-icon/icons/svg/2990/2990457.svg"
+      alt=""
+      height="30px"
+      width="30px"
+    />
+  </a>
+  <% }else{ %> &nbsp;&nbsp;<i
+    class="fa fa-thumbs-o-up"
+    aria-hidden="true"
+    style="color: lightblue;"
+  ></i>
+  <% } %> <% var pstLikeCNT = 0 %> <% for(postLike of post.likes){ %> <%
+  if(postLike){ %> <% pstLikeCNT++ %> <% } %> <% } %> <%= pstLikeCNT %>
+
+  <br />
+
+  <div class="post-comments">
+    <% if(locals.user){ %>
+    <h4>New Comment:</h4>
+    <form action="/comments/create" method="POST">
+      <div class="form-group green-border-focus">
+        <textarea
+          class="form-control"
+          id="postContent"
+          rows="1"
+          name="content"
+          placeholder="Write Comment"
+        ></textarea>
+      </div>
+
+      <input type="hidden" value="<%= post._id %>" name="post" />
+      <div style="margin-top: 1rem;">
+        <button type="submit" class="btn btn-primary">Post</button>
+      </div>
+    </form>
+    <% } %>
+    <div class="post-comments-list">
+      <ul id="post-comments-<%= post._id %>">
+        <% for(comment of post.comments){ %>
+
+        <li>
+          <%- include('_comment.ejs') -%>
+        </li>
+
         <% } %>
-        <small><a href="/users/profile/<%= post.user.id %>" class="post-user-name"><%= post.user.name %></a></small>
- 
-        <!-- <small><%= post.user.name %></small> -->
-        <% if(locals.user && post.user.id == locals.user.id){ %>
-            <a class="delete-post-button" href="/posts/destroy/<%= post.id %>">Delete</a>
-        <% } %>
+      </ul>
     </div>
-        <br><br>
-
-
-        <div class="post-content">
-        
-            <%- post.content %>
-
-        </div>
-
-        
-        
-        
-       
-        <div class="post-pic" >
-            <% if(post.uploadPic[0]){ %>
-                <% for(var i=0; i<5; i++) { %>
-                    <% if(post.uploadPic[i]){ %>
-                        <img src="<%= post.uploadPic[i] %>" alt="USER PIC"  class="pic">
-                    <% } %>
-                <% } %>
-            <% } %>
-        </div>
-        <% if(locals.user){ %>
-            &nbsp;&nbsp;<a href="/likes/toggle/?id=<%= post._id %>&type=Post" type="Post"> <img src="https://www.flaticon.com/premium-icon/icons/svg/2990/2990457.svg" alt="" height="30px" width="30px"> </a>
-        <% }else{ %>
-            &nbsp;&nbsp;<i class="fa fa-thumbs-o-up" aria-hidden="true" style="color: lightblue;"></i>
-        <% } %>
-        
-        <% var pstLikeCNT = 0 %>
-        
-        <% for(postLike of post.likes){ %>
-            <% if(postLike){ %>
-                <% pstLikeCNT++ %>
-            <% } %>
-        <% } %>
-        <%= pstLikeCNT %>
-        
-                <br>
-
-               
-       
-        
-   
-    <div class="post-comments">
-        <% if(locals.user){ %>
-            <h4>New Comment:</h4>
-            <form action="/comments/create" method="POST">
-                <div class="form-group green-border-focus">
-                    <textarea class="form-control" id="postContent" rows="1" name="content" placeholder="Write Comment"></textarea>
-                </div>
-                
-                <input type="hidden" value="<%= post._id %>" name="post">
-                <div style="margin-top: 1rem;">
-                    <button type="submit" class="btn btn-primary">Post</button>
-                </div>
-            </form>
-        <% } %>
-        <div class="post-comments-list">
-            <ul id="post-comments-<%= post._id %>">
-                <% for(comment of post.comments){ %>
-                    
-                    <li>
-                        <%- include('_comment.ejs') -%>
-                    </li>
-
-                <% } %>
-            </ul>
-        </div>
-    </div>
-</li><br>
+  </div>
+</li>
+<br />
